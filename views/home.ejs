@@ -39,21 +39,27 @@
                 Find your home away from home</p>
             <a href="/houses" class="btn btn-lg btn-secondary border-white bg-white mb-3">View
                 Houses</a>
-                <nav class="navbar mt-2" style="background-color:transparent;border-radius: 2rem;border-color:black ; margin-left: 8rem;">
-                    <div class="container-fluid">
-                      <form class="d-flex" role="search" action="/houses">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="color: white; padding: 0 12rem;background-color: rgba(255, 255, 255, 0);">
-                        <a href="/houses"><button class="btn btn-outline-success" type="submit"><i class="uil uil-search"></i></button></a>
-                      </form>
-                    </div>
-                  </nav>
-                  
+                        <input id="homepage" class="form-control" type="search" placeholder="Search" aria-label="Search" style="border-color: rgba(255, 255, 255,0.2) ; color: white;background-color: rgba(255, 255, 255, 0.3);">
+                        <a id="home-click" href="/houses"><button class="btn btn-outline-success"><i class="uil uil-search"></i></button></a>
         </main>
 
         <footer class="=mt-autho text-white-50">
             <p style="text-align: center"> Copyright &copy;<script>document.write(new Date().getFullYear())</script> Ashrith All Rights Reserved</p>        
         </footer>
     </div>
+
+    <script>
+        let enter=document.getElementById("homepage")
+        let btn=document.getElementById("home-click")
+        if(enter){
+            enter.addEventListener("keypress",(e)=>{
+                if (e.keyCode === 13) {
+                    btn.click()
+
+                }
+            })
+        }
+    </script>
     
 </body>
 </html>

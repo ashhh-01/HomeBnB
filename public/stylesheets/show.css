@@ -197,3 +197,9 @@
 .calendar-date{
     display: block;
 }
+.modal-content{
+  background-color: transparent;
+}
+.modal-body{
+  padding: 0;
+}

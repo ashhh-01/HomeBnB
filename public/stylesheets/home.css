@@ -37,3 +37,6 @@ body {
     color: #333;
     text-shadow: none;
 }
+.btn-outline-success {
+    border-color: transparent;
+}
