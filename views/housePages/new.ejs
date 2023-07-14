@@ -1,0 +1,101 @@
+<% layout("./layouts/boilerplate.ejs") -%>
+<link rel="stylesheet" href="/stylesheets/image.css">
+<div class="row">
+    <h1 class="text-center">Set up a House</h1>
+    <div class="col-md-6 offset-md-3">
+        
+    <form action="/houses" method="post" id="form" novalidate class="validated-form" enctype="multipart/form-data">
+        <div class="mb-2">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" type="text" id="title" name="campground[title]" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-2">
+            <label class="form-label" for="location">Location</label>
+            <input class="form-control" type="text" id="location" name="campground[location]"required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div>
+            <label class="form-label">Choose Image(s)</label>
+            <div class="form-file custom-file">
+                  <input class="form-control custom-file-input" type="file" id="image" name="images" multiple onchange="previewMultiple(event)">
+                  <label for="image" class="form-label custom-file-label"></label>
+              </div>
+              <div id="formFile"></div>
+          </div>
+        <!-- <div class="input-group mb-3">
+            <input type="file" class="form-control custom-file-input"id="image" name="images" id="inputGroupFile02"multiple onchange="previewMultiple(event)">
+            <label class="input-group-text" for="image">Upload</label>
+            <div id="formFile"></div>
+          </div> -->
+        <!-- <div class="mb-3">
+            <label class="form-label" for="image">Image Url</label>
+            <input class="form-control" type="text" id="image" name="campground[image]"required>
+            <div class="valid-feedback">
+                Looks good!
+            </div> -->
+        <!-- </div> -->
+        <div class="mb-2">
+            <label class="form-label" for="price">Price</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="price-label">$</span>
+                <input type="text" class="form-control" id="price" 
+                placeholder="0.0" aria-label="price" aria-describedby="price-label"name="campground[price]" required>
+              </div>
+              <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <input type="number" style="display: none;" id="distance-car" name="campground[carDist]" value="">
+        <input type="number" style="display: none;" id="distance-plane" name="campground[airDist]" value="">
+        <input type="number" style="display: none;" id="distance-metro" name="campground[metroDist]" value="">
+
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea class="form-control" rows="5" type="text" id="description" name="campground[description]" required></textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-9">
+                    <button type="submit" class="btn btn-success">Post your Home (Disabled for security purpose)</button>
+                </div>
+                <div class="col-3">
+                    <a href="/houses"class="btn btn-light border-dark px-5 ms-4"><i class="uil uil-corner-down-left "></i></a>
+                </div>
+            </div>
+        </div>
+    </form>    
+    </div>
+</div>
+
+<script>
+function generateRandomDistances() {
+    // Generate a random number between 1 and 100 for the plane distance.
+    let distancePlane = Math.floor(Math.random() *4) + 2;
+  
+    // Store the random distance in the hidden field.
+    document.getElementById("distance-plane").value = distancePlane;
+  
+    // Generate a random number between 1 and 100 for the car distance.
+    let distanceCar = Math.floor(Math.random() *100) + 150;
+  
+    // Store the random distance in the hidden field.
+    document.getElementById("distance-car").value = distanceCar;
+  
+    // Generate a random number between 1 and 100 for the metro distance.
+    let distanceMetro = Math.floor(Math.random() *6) + 2;
+  
+    // Store the random distance in the hidden field.
+    document.getElementById("distance-metro").value = distanceMetro;
+  }
+  
+  // Call the generateRandomDistances function when the form is submitted.
+  document.getElementById("form").addEventListener("submit", generateRandomDistances);
+  </script>

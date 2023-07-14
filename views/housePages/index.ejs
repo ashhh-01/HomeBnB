@@ -1,0 +1,51 @@
+<% layout("./layouts/boilerplate.ejs") -%>
+<div id="cluster-map"></div>
+    <h5 class="text-center my-5"><i class="uil uil-estate index-icons"></i><i class="uil uil-building index-icons"></i>
+        <i class="uil uil-trees index-icons"></i><i class="uil uil-water index-icons"></i>
+        <i class="uil uil-snow-flake index-icons"></i><i class="uil uil-mountains-sun index-icons"></i>
+        <i class="uil uil-bed-double index-icons"></i>
+        <i class="uil uil-coffee index-icons"></i>
+        <i class="uil uil-restaurant index-icons"></i>
+        <i class="uil uil-kayak index-icons"></i><i class="uil uil-key-skeleton index-icons"></i><i class="uil uil-luggage-cart index-icons"></i>
+        <i class="uil uil-compass index-icons"></i><i class="uil uil-basketball index-icons"></i><i class="uil uil-desert index-icons"></i><i class="uil uil-camera index-icons"></i>
+        <i class="uil uil-dumbbell index-icons"></i><i class="uil uil-music index-icons"></i><i class="uil uil-tv-retro index-icons"></i><i class="uil uil-golf-ball index-icons"></i>
+        <i class="uil uil-umbrella index-icons"></i>
+    </h5>
+    <ul>
+        <% for(let campground of campgrounds){ %>
+            <div class="card index-card mb-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <% if(campground.images.length){ %>
+                        <img src="<%=campground.images[0].url%>" alt="" class="img-fluid" style="height: 250px; width: 400px; object-fit: cover;border-radius: 10px;"crossorigin="anonymous">
+                        <% }else{ %>
+                            <img crossorigin="anonymous" src="https://res.cloudinary.com/ashh2021/image/upload/v1688989266/Houses/n0cbfqsmy7lvtvtk0xex.jpg" alt="" class="img-fluid" crossorigin="anonymous">
+                            <% } %>
+                        </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=campground.title%></h5>
+                            <p class="card-text"><%=campground.description %></p>
+                            <div class="d-flex justify-content-between">
+                            <p class="card-text">
+                                <small class="text-secondary"><%=campground.location  %></small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-body-secondary"><i class="uil uil-car" style="color: rgba(255,0,0,.6);font-size: 1.2re,;"></i> <%=campground.carDist%> KM</small>
+                            </p>
+                            </div>
+
+                            <a class="btn btn-primary" href="/houses/<%=campground._id%>">View <%=campground.title%>   <i class="uil uil-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </ul>
+<script>
+    const mapToken = '<%- process.env.MAPBOX_TOKENS %>';
+    const houseData = {features:<%- JSON.stringify(campgrounds) %>};
+
+</script>
+       
+<script src="/javascripts/clusterMap.js"></script>
