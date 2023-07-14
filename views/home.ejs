@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link  crossorigin="anonymous" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link  rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" crossorigin="anonymous">
+
     <link rel="stylesheet" href="/stylesheets/home.css">
     <link rel="icon" type="image/x-icon" href="/img/logo1.png">
 
@@ -37,8 +39,17 @@
                 Find your home away from home</p>
             <a href="/houses" class="btn btn-lg btn-secondary border-white bg-white mb-3">View
                 Houses</a>
+                <nav class="navbar mt-2" style="background-color:transparent;border-radius: 2rem;border-color:black ; margin-left: 8rem;">
+                    <div class="container-fluid">
+                      <form class="d-flex" role="search" action="/houses">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="color: white; padding: 0 12rem;background-color: rgba(255, 255, 255, 0);">
+                        <a href="/houses"><button class="btn btn-outline-success" type="submit"><i class="uil uil-search"></i></button></a>
+                      </form>
+                    </div>
+                  </nav>
+                  
         </main>
- 
+
         <footer class="=mt-autho text-white-50">
             <p style="text-align: center"> Copyright &copy;<script>document.write(new Date().getFullYear())</script> Ashrith All Rights Reserved</p>        
         </footer>

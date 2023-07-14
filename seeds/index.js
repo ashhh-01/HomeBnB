@@ -48,9 +48,9 @@ const seedDB=async()=>{
 
       const random1000 = Math.floor(Math.random() * 1000);
       const price=Math.floor(Math.random()*90)+10;
-      const carDist=Math.floor(Math.random() *50) + 20;
-      const airDist=Math.floor(Math.random() *4) + 2;
-      const metroDist=Math.floor(Math.random() *6) + 2;
+      const carDist=Math.floor(Math.random() *100) + 30;
+      const airDist=Math.floor(Math.random() *2) + 2;
+      const metroDist=Math.floor(Math.random() *4) + 2;
 
         const camp=new Campground({
             // location: `${cities[randomInt].name}, India`,

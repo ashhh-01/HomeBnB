@@ -1,6 +1,7 @@
 if(process.env.NODE_ENV!=="production"){
     require("dotenv").config()
 }
+
 const express=require("express");
 const app=express()
 const path=require("path")
@@ -8,7 +9,6 @@ const mongoose=require("mongoose");
 const methodOverride=require("method-override")
 const ejsMate=require("ejs-mate")
 const ExpressError=require("./utils/ExpressError")
-const session=require("express-session")
 const flash=require("connect-flash")
 const passport=require("passport")
 const localStrategy=require("passport-local")
@@ -16,11 +16,25 @@ const User=require("./models/user")
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet=require("helmet")
 
+const session=require("express-session")
+const MongoStore = require('connect-mongo');
+
 
 const houseRoutes=require("./routes/houseRoutes")
 const reviewRoutes=require("./routes/reviews");
 const userRoutes=require("./routes/user")
 const db_url=process.env.DB_URL
+
+
+const store = MongoStore.create({
+    mongoUrl: db_url,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: process.env.STOREKEY
+    }
+});
+
+
 mongoose.connect("mongodb://127.0.0.1:27017/camp-site1")
 
 const db=mongoose.connection

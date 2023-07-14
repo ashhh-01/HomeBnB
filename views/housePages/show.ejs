@@ -1,5 +1,6 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/stars.css">
+<link rel="stylesheet" href="/stylesheets/show.css">
 
 <div class="row">
   <div class="col-6">
@@ -56,13 +57,111 @@
               <button class="btn btn-danger">Delete <i class="uil uil-trash"></i></button>
           </form>
           <% } %>
-          <a href="/houses/thankyou" class="card-link btn text-bg-primary">Book Now <i class="uil uil-book-open"></i></a>
+          <a href="#date" class="card-link btn text-bg-primary" id="date-click">Book Now <i class="uil uil-book-open"></i></a>
 
           </div>
           <div class="card-footer text-secondary">
               2 Days ago
           </div>
         </div>
+
+
+
+        <div class="calendar-date d-flex justify-content-start mb-5">
+        <div class="calendar-wrap" id="date">
+          <h2 class="month-year"><%const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ];%> <%= monthNames[new Date().getMonth()]%>  <%=  new Date().getFullYear() %></h2>
+        
+          <table class="calendar">
+            <thead>
+              <tr>
+                <th class="day-title" scope="col">Sun</th>
+                <th class="day-title" scope="col">Mon</th>
+                <th class="day-title" scope="col">Tue</th>
+                <th class="day-title" scope="col">Wed</th>
+                <th class="day-title" scope="col">Thu</th>
+                <th class="day-title" scope="col">Fri</th>
+                <th class="day-title" scope="col">Sat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="week">
+                <td class="day prev-mon" tabindex="0"><span class="day-number">29</span></td>
+                <td class="day prev-mon" tabindex="0"><span class="day-number">30</span></td>
+                <td class="day prev-mon" tabindex="0"><span class="day-number">31</span></td>
+                <td class="day" tabindex="0"><span class="day-number">1</span></td>
+                <td class="day" tabindex="0"><span class="day-number">2</span></td>
+                <td class="day" tabindex="0"><span class="day-number">3</span></td>
+                <td class="day" tabindex="0"><span class="day-number">4</span></td>
+              </tr>
+              <tr class="week">
+                <td class="day" tabindex="0"><span class="day-number">5</span></td>
+                <td class="day" tabindex="0"><span class="day-number">6</span></td>
+                <td class="day" tabindex="0"><span class="day-number">7</span></td>
+                <td class="day" tabindex="0"><span class="day-number">8</span></td>
+                <td class="day" tabindex="0"><span class="day-number">9</span></td>
+                <td class="day" tabindex="0"><span class="day-number">10</span></td>
+                <td class="day" tabindex="0"><span class="day-number">11</span></td>
+              </tr>
+              <tr class="week">
+                <td class="day" tabindex="0"><span class="day-number">12</span></td>
+                <td class="day" tabindex="0"><span class="day-number">13</span></td>
+                <td class="day" tabindex="0"><span class="day-number">14</span></td>
+                <td class="day" tabindex="0"><span class="day-number">15</span></td>
+                <td class="day" tabindex="0"><span class="day-number">16</span></td>
+                <td class="day" tabindex="0"><span class="day-number">17</span></td>
+                <td class="day" tabindex="0"><span class="day-number">18</span></td>
+              </tr>
+              <tr class="week">
+                <td class="day" tabindex="0"><span class="day-number">19</span></td>
+                <td class="day" tabindex="0"><span class="day-number">20</span></td>
+                <td class="day" tabindex="0"><span class="day-number">21</span></td>
+                <td class="day" tabindex="0"><span class="day-number">22</span></td>
+                <td class="day" tabindex="0"><span class="day-number">23</span></td>
+                <td class="day" tabindex="0"><span class="day-number">24</span></td>
+                <td class="day" tabindex="0"><span class="day-number">25</span></td>
+              </tr>
+              <tr class="week">
+                <td class="day" tabindex="0"><span class="day-number">26</span></td>
+                <td class="day" tabindex="0"><span class="day-number">27</span></td>
+                <td class="day" tabindex="0"><span class="day-number">28</span></td>
+                <td class="day" tabindex="0"><span class="day-number">29</span></td>
+                <td class="day" tabindex="0"><span class="day-number">30</span></td>
+                <td class="day" tabindex="0"><span class="day-number">31</span></td>
+                <td class="day next-mon" tabindex="0"><span class="day-number">1</span></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <a class="button reset" href="/houses/thankyou">Book now</a>
+        </div>
+        </div>
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
   <div class="col-6">
     <div  id='map'></div>
@@ -215,6 +314,42 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
   const reviewForm = document.querySelector(".reviewForm");
     const defaultStarInput = document.querySelector("input[name='review[rating]']");
@@ -295,6 +430,151 @@ trainIcon.addEventListener("click", () => {
     distanceDisplay.textContent = `<%=campground.metroDist%> Hrs`;
   }
 });
+
+
+//calendar
+
+let dragging = false;
+let days = document.querySelectorAll('.day');
+let offset = 0;
+
+function activateDay() {
+  let activeElement = document.activeElement;
+  let activeAItem = document.querySelector('.active-a');
+  let activeBItem = document.querySelector('.active-b');
+  
+  if (activeAItem && activeBItem) {
+    clearActiveDays();
+    clearRange();
+    activeElement.classList.add('active-a');
+    return;
+  }
+  
+  if (activeAItem) activeElement.classList.add('active-b');
+  else activeElement.classList.add('active-a');
+}
+
+function clearActiveDays() {
+  let activeAItem = document.querySelector('.active-a');
+  let activeBItem = document.querySelector('.active-b');
+  
+  if (activeAItem) activeAItem.classList.remove('active-a');
+  if (activeBItem) activeBItem.classList.remove('active-b');
+}
+
+function clearRange() {
+  days.forEach(item => {
+    item.classList.remove('range');
+  });
+}
+
+function calculateRange() {
+  let activeAIndex, activeBIndex;
+
+  days.forEach((item, index) => {
+    if (item.classList.contains('active-a')) activeAIndex = index;
+    if (item.classList.contains('active-b')) activeBIndex = index;
+  });
+
+  if (activeAIndex < activeBIndex) {
+    for (let i = activeAIndex; i <= activeBIndex; i++) {
+      days[i].classList.add('range');
+    }
+  }
+
+  if (activeAIndex > activeBIndex) {
+    for (let i = activeAIndex; i >= activeBIndex; i--) {
+      days[i].classList.add('range');
+    }
+  }
+}
+
+function startMove(item) {
+  dragging = true;
+  
+  let activeAItem = document.querySelector('.active-a');
+  let activeBItem = document.querySelector('.active-b');
+  
+  if (!activeBItem && activeAItem) {
+    item.classList.add('active-b');
+    calculateRange();
+  } else {
+    clearActiveDays();
+    clearRange();
+    item.classList.add('active-a');
+  }
+}
+
+function move(item) {
+  if (dragging) {
+    let activeA = document.querySelector('.active-a');
+    let prevActiveB = document.querySelector('.active-b');
+
+    clearRange();
+
+    if (prevActiveB) prevActiveB.classList.remove('active-b');
+    if (!item.classList.contains('active-a')) item.classList.add('active-b');
+
+    let activeB = document.querySelector('.active-b');
+
+    calculateRange();
+  }
+}
+
+function endMove(item) {
+  dragging = false;
+}
+
+window.addEventListener('mouseup', e => {
+  dragging = false;
+});
+
+days.forEach((item, index) => {
+  let dayNumber = item.querySelector('.day-number').innerHTML;
+  
+  if (dayNumber === '1' && !item.classList.contains('next-mon')) {
+    offset = index;
+  }
+  
+  item.addEventListener('mousedown', e => {
+    startMove(item);
+  });
+  
+  item.addEventListener('mousemove', e => {
+    move(item);
+  });
+  
+  item.addEventListener('mouseup', e => {
+    endMove(item);
+  });
+});
+
+window.addEventListener('keyup', e => {
+  let key = e.keyCode;
+  
+  switch (key) {
+    case 13:
+      activateDay();
+      calculateRange();
+      break;
+  }
+});
+
+document.querySelector('.reset').addEventListener('click', e => {
+  clearActiveDays();
+  clearRange();
+});
+  let bookbtn=document.getElementById("date-click")
+  let div = document.getElementById("date");
+
+  // Add the "active" class to the div element.
+  if(bookbtn){
+    bookbtn.addEventListener("click",()=>{
+      div.classList.add("calendar-date");
+
+    })
+  }
+
 
 
 </script>
