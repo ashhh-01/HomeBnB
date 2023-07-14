@@ -11,7 +11,7 @@ const {houseName,details}=require("./seedHelpers")
 const cities = require('./cities');
 
 
-mongoose.connect("mongodb+srv://Ashh:1Ashrithmr2001@homebnb.vpwb6zz.mongodb.net/")
+mongoose.connect(db_urlAtlas)
 const axios=require("axios")
 
 
