@@ -1,0 +1,39 @@
+<!-- <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary bg-dark border-bottom-dark" data-bs-theme="dark"> -->
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" style="background-color: white;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/homeBnB">
+        <img src="/img/logo1.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        <span style="color: rgba(255, 0, 0,0.7);">HomeBnB</span>
+      </a>
+      <!-- <a class="navbar-brand" href="/homeBnB">HomeBnB</a> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" style="color: black;" href="/homeBnB"><i class="uil uil-globe"></i></a>
+          <a class="nav-link" style="color: black;" href="/houses"><i class="uil uil-estate"></i> Homes</a>
+          <a class="nav-link" href="/houses/new"><i class="uil uil-plus-circle"></i> Post your Home</a>
+          </div>
+          <div class="navbar-nav ms-auto me-4 ">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i style="font-size: 1.7rem;" class="uil uil-user-circle">                </i>
+                  <%if(currentUser){%>
+                    <%=currentUser.username %>
+                  <% } %>
+                </a>
+              <ul class="dropdown-menu ">
+                <%if(!currentUser){  %>
+                <li><a class="dropdown-item " href="/login">Login <i class="uil uil-signin ms-3"></i></a></li>
+                <li><a class="dropdown-item " href="/register">Register <i class="uil uil-pen"></i></a></li>
+                <%}else{%>
+                <li><a class="dropdown-item" href="/logout">Logout <i class="uil uil-signout"></i></a></li>
+                  <% } %>
+              </ul>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>

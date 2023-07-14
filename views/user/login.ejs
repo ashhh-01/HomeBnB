@@ -1,0 +1,35 @@
+<% layout("./layouts/boilerplate.ejs") -%>
+<div class="container d-flex  justify-content-center align-items-center mt-2">
+  <div class="row flex-fill">                
+    <div class="col-md-4 offset-md-4" >     
+      <div class="card shadow " style="max-height: 30px;">
+        <img src="/img/login.jpg"
+        alt="" class="card-img-top" />
+        <div class="card-body">
+        <h1 class="card-title"> Login</h1>
+        <form action="/login" method="post" novalidate class="validated-form">
+            <div class="mb-1">
+                <label class="form-label" for="username">Username</label>
+                <input class="form-control" type="text" id="username" name="username"required autofocus>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                    <div class="mb-1">
+                        <label class="form-label" for="password">Password</label>
+                        <input class="form-control" type="password" id="password" name="password"required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 my-4">
+                      <button class="btn btn-success">
+                        Login</button>
+                     </div>       
+                     </form>        
+          </div>    
+          </div>        
+                </div>
+
+            </div>
+        </div>
+    </div>

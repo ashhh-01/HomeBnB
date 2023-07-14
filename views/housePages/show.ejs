@@ -1,0 +1,305 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
+<div class="row">
+  <div class="col-6">
+    <div id="houseExamples" class="carousel slide">
+      <div class="carousel-inner">
+        <% campground.images.forEach((img,i)=>{ %>
+        <div class="carousel-item <%= i==0?"active":"" %>">
+          <img  src="<%=img.url%>" class="d-block w-100 showpageImg" alt="" crossorigin="anonymous">
+        </div>  
+        <% }) %>
+      </div>
+      <% if(campground.images.length>1){%>
+      <button class="carousel-control-prev" type="button" data-bs-target="#houseExamples" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#houseExamples" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <% } %>
+    </div>
+
+      <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title"><%= campground.title%></h5>
+            <p class="card-text"><%= campground.description%></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-secondary"><%= campground.location%></li>
+            <li class="list-group-item text-secondary">Submitted by <%= campground.owner.username%></li>
+            <div class="d-flex justify-content-between">
+            <div>
+            <li class="list-group-item" style="border: none;">$<%= campground.price%>/Night</li>
+            </div>
+
+            <div>
+              <span id="car-icon"><i class="uil uil-car-sideview dist-icons"></i></span>
+              <span id="plane-icon"><i class="uil uil-plane dist-icons"></i></span>
+              <span id="train-icon"><i class="uil uil-metro dist-icons"></i></span>
+              <span id="distance" class="badge rounded-pill text-bg-success m-2 p-2 px-4"><%=campground.carDist%> KM</span>
+            </div>
+
+
+
+
+            </div>
+
+          </ul>
+          <div class="card-body">
+            <% if(currentUser && campground.owner.equals(currentUser._id)){ %>
+            <a href="/houses/<%=campground._id%>/edit" class="card-link btn btn-warning text-light">Edit <i class="uil uil-pen"></i></a>
+            <form class="d-inline" action="/houses/<%=campground._id%>?_method=DELETE" method="POST">
+              <button class="btn btn-danger">Delete <i class="uil uil-trash"></i></button>
+          </form>
+          <% } %>
+          <a href="/houses/thankyou" class="card-link btn text-bg-primary">Book Now <i class="uil uil-book-open"></i></a>
+
+          </div>
+          <div class="card-footer text-secondary">
+              2 Days ago
+          </div>
+        </div>
+  </div>
+  <div class="col-6">
+    <div  id='map'></div>
+    <div class="row my-4">
+      <div class="col-md-3 border py-3 ms-3" style="border-radius: 1rem;">
+       <span class="ms-4 ps-4"><i class="uil uil-bed-double show-page-icons"></i></span>
+        <div class="text-center">
+            <%=Math.floor(Math.random()*4)+1%> Bedrooms<br>
+            <%=Math.floor(Math.random()*2)+1%> Queen Beds
+        </div>        
+      </div>
+      <div class="col-md-3 border py-3 ms-5"style="border-radius: 1rem;">
+        <span class="ms-3 ps-4"><i class="uil uil-bath show-page-icons"></i></span>
+        <div class="text-center">
+            Dedicated Shower
+        </div>
+
+      </div>
+      <div class="col-md-3 border py-3 ms-5"style="border-radius: 1rem;">
+        <span class="ms-3 ps-4"><i class="uil uil-wifi show-page-icons"></i></span>
+        <div class="text-center">
+            High Speed Wifi
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row ms-2">
+      <div class="col-md-6">
+        <div class="d-flex justify-content-between mb-1">
+        <span>Hygiene</span>
+        <div class="progress mt-2" role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 5px; width: 50%;margin-top: 5px; ">
+          <div class="progress-bar" style="background-color:#FF6666;"></div>
+        </div>
+        </div>
+
+        <div class="d-flex justify-content-between mb-2">
+          <span>Communication</span>
+          <div class="progress mt-2" role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 5px; width: 50%;margin-top: 5px;">
+            <div class="progress-bar" style="width: 55%;background-color:#FF6666;"></div>
+          </div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2">
+            <span>Accuracy</span>
+            <div class="progress mt-2" role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 5px; width: 50%;margin-top: 5px;">
+              <div class="progress-bar" style="width: 55%;background-color:#FF6666;"></div>
+            </div>
+            </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="d-flex justify-content-between mb-2">
+          <span>Check In</span>
+          <div class="progress mt-2" role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 5px; width: 50%;margin-top: 5px;">
+            <div class="progress-bar" style="width: 55%;background-color:#FF6666;"></div>
+          </div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2">
+            <span>Location</span>
+            <div class="progress mt-2" role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 5px; width: 50%;margin-top: 5px;">
+              <div class="progress-bar" style="width: 55%;background-color:#FF6666;"></div>
+            </div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2">
+              <span>Value</span>
+              <div class="progress mt-2" role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 5px; width: 50%;margin-top: 5px;">
+                <div class="progress-bar" style="width: 55%;background-color:#FF6666;"></div>
+              </div>
+              </div>
+      </div>
+    </div>
+  
+
+
+
+
+    <% if(currentUser){ %>
+    <h4 class="mt-2">Leave a review</h4>
+    <p id="status" class="d-none my-0 text-danger alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="uil uil-exclamation-triangle mx-3"></i> Please Add a Rating
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </p>
+    <form action="/houses/<%=campground._id%>/reviews"method="POST" class="mb-3 validated-form reviewForm" novalidate>
+      <!-- <div class="mb-3">
+        <label class="form-label" for="rating">Rating</label>
+        <input class="form-range" type="range"min="0" max="5" name="review[rating]" id="rating">
+      </div> -->
+      <fieldset class="starability-coinFlip mt-4">
+        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+      <div class="mb-3">
+        <textarea class="form-control" placeholder="Write a Review" name="review[body]" id="body" cols="30" rows="5"></textarea>
+        <div class="valid-feedback">
+          Looks good!
+      </div>
+      </div>
+      <button class="btn btn-success">Submit <i class="uil uil-message"></i></button>
+    </form>
+    <% } %>
+    <% for(let review of campground.reviews){ %>
+      <h6>Reviews</h6>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+          <h6 class="card-subtitle ps-1 text-body-secondary"><i class="uil uil-user me-2"style="font-size:1.5rem"></i><%=review.author.username%></h6>
+          <p class="font-monospace" style="color: grey;"><i class="uil uil-calendar-alt"></i> <%=new Date().toISOString().split("T")[0]  %></p>
+
+          </div>
+          <div class='stars-wrapper mb-1'>
+            <% for( let i = 0; i < review?.rating; i++ ) { %>
+                <div class='star-filled'>&#9733;</div>
+            <% } %>
+            <% for( let i = 0; i < 5 - review?.rating; i++ ) { %>
+                <div class='star-empty'>&#9734;</div>
+            <% } %>
+        </div>
+          <p class="card-text ps-1"><%=review.body%></p> 
+          <% if(currentUser && review.author.equals(currentUser._id)){ %>
+          <form action="/houses/<%=campground._id%>/reviews/<%=review._id%>?_method=Delete"method="POST">
+            <div class="container ">
+              <div class="row justify-content-between">
+                <div class="col-11"></div>
+                <div class="ms-auto col-1">
+                  <button class="btn btn-sm btn-danger "><i class="uil uil-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  const reviewForm = document.querySelector(".reviewForm");
+    const defaultStarInput = document.querySelector("input[name='review[rating]']");
+    const statusContainer = document.querySelector("#status");
+    if(reviewForm) {
+        reviewForm.addEventListener("submit", function(e) {
+            if(defaultStarInput.checked) {
+                statusContainer.classList.remove("d-none");
+                e.preventDefault();
+            } else {
+                statusContainer.classList.add("d-none");
+            }
+        })
+    }
+</script>
+
+<script >
+const mapToken = '<%- process.env.MAPBOX_TOKENS %>';
+const houseLocation = <%- JSON.stringify(campground) %>;
+const reviewLength=<%=campground.reviews.length %>;
+
+
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 80) + 20;
+}
+
+let progressBars = document.querySelectorAll(".progress-bar");
+
+for (let i = 0; i < progressBars.length; i++) {
+  let progressBar = progressBars[i];
+  let width = getRandomNumber() + "%";
+  progressBar.style.width = width;
+}   
+
+
+
+const carIcon = document.getElementById("car-icon");
+const planeIcon = document.getElementById("plane-icon");
+const trainIcon = document.getElementById("train-icon");
+const distanceDisplay = document.getElementById("distance");
+
+let currentMode = "car"; // Keep track of the current transportation mode
+
+// Event listener for car icon
+carIcon.addEventListener("click", () => {
+  if (currentMode !== "car") {
+    currentMode = "car";
+    carIcon.classList.add("click-dist-icons")
+    trainIcon.classList.remove("click-dist-icons")
+    planeIcon.classList.remove("click-dist-icons")
+    // Generate and set car distance (example: randomly generated distance)
+    distanceDisplay.textContent = `<%=campground.carDist%> KM`;
+  }
+});
+
+// Event listener for plane icon
+planeIcon.addEventListener("click", () => {
+  if (currentMode !== "plane") {
+    currentMode = "plane";
+    planeIcon.classList.add("click-dist-icons")
+    trainIcon.classList.remove("click-dist-icons")
+    carIcon.classList.remove("click-dist-icons")
+    // Generate and set air distance (example: randomly generated distance)
+    distanceDisplay.textContent = `<%=campground.airDist%> Hrs`;
+  }
+});
+
+// Event listener for train icon
+trainIcon.addEventListener("click", () => {
+  if (currentMode !== "train") {
+    currentMode = "train";
+    trainIcon.classList.add("click-dist-icons")
+    planeIcon.classList.remove("click-dist-icons")
+    carIcon.classList.remove("click-dist-icons")
+
+    // Generate and set train distance (example: randomly generated distance)
+    distanceDisplay.textContent = `<%=campground.metroDist%> Hrs`;
+  }
+});
+
+
+</script>
+
+
+
+
+<script src="/javascripts/showMap.js"></script>
