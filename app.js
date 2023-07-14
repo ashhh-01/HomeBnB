@@ -28,7 +28,7 @@ const db_url=process.env.MONGODB
 
 
 const store = MongoStore.create({
-    mongoUrl: db_url,
+    mongoUrl: db_urlAtlas,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: process.env.STOREKEY
