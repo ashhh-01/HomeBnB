@@ -23,22 +23,21 @@ const MongoStore = require('connect-mongo');
 const houseRoutes=require("./routes/houseRoutes")
 const reviewRoutes=require("./routes/reviews");
 const userRoutes=require("./routes/user")
-const db_urlAtlas=process.env.DB_URLATLAS
-const db_url=process.env.MONGODB
+const dbUrl=process.env.DB_URLATLAS || "mongodb://127.0.0.1:27017/camp-site1"
 
 
 const store = MongoStore.create({
-    mongoUrl: db_urlAtlas,
+    mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: process.env.STOREKEY
+        secret: process.env.STOREKEY || "HomebnbSecret"
     }
 });
 
 store.on("error",function(e){
     console.log("Session Store Error",e)
 })
-mongoose.connect(db_urlAtlas)
+mongoose.connect(dbUrl)
 
 const db=mongoose.connection
 db.on("error",console.error.bind(console,"Connection error:"))
@@ -143,7 +142,7 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render("error",{err})
 })
 
-const PORT=process.env.PORT 
+const PORT=process.env.PORT || 3000 
 app.listen(PORT,()=>{
     console.log(`Serving on port ${PORT}`)
 })

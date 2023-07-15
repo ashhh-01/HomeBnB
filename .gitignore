@@ -5,3 +5,4 @@
 temp/
 
 .env
+node_modules
