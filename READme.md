@@ -1,4 +1,4 @@
-<h1>HomeBnB</h1>
+<h1><a href="https://homebnb-qods.onrender.com/houses">HomeBnB</a></h1>
 
 <h2>About</h2>
 This project is a full-stack web application that serves as a clone of Airbnb. It allows users to post homes for rent, leave reviews, and explore available rental options. The application includes CRUD (Create, Read, Update, Delete) functionality and features user authorization, login, and logout capabilities. The stack used for development includes HTML, CSS, Bootstrap, JavaScript, Node.js, Express.js, EJS (Embedded JavaScript), and MongoDB Atlas for the database. The application is deployed using the Render platform and integrates CI/CD (Continuous Integration/Continuous Deployment) practices.
