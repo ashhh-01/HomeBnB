@@ -71,14 +71,14 @@ Submit the form to upload the image. The image will be stored in Cloudinary for 
 
 
 <h2>Screenshots</h2>
-<img style="width:150px" src="./public/ss/edit.png">
-<img style="width:150px" src="./public/ss/home.png">
-<img style="width:150px" src="./public/ss/home2.png">
-<img style="width:150px" src="./public/ss/home3.png">
-<img style="width:150px" src="./public/ss/login.png">
-<img style="width:150px" src="./public/ss/show.png">
-<img style="width:150px" src="./public/ss/show2.png">
-<img style="width:150px" src="./public/ss/thankyou.png">
+<span><img style="width:350px" src="./public/ss/home.png"><img style="width:350px" src="./public/ss/home2.png">
+</span>
+<span><img style="width:350px" src="./public/ss/edit.png">
+<img style="width:350px" src="./public/ss/home3.png"></span>
+<span><img style="width:350px" src="./public/ss/login.png">
+<img style="width:350px" src="./public/ss/show.png"></span>
+<span><img style="width:350px" src="./public/ss/show2.png">
+<img style="width:350px" src="./public/ss/thankyou.png"></span>
 
 <h2>Thank you!</h2>
 
