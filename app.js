@@ -56,7 +56,9 @@ const scriptSrcUrls = [
     "https://api.tiles.mapbox.com/",
     "https://api.mapbox.com/",
     "https://cdn.jsdelivr.net",
-    "https://www.googletagmanager.com/"
+    "https://www.googletagmanager.com/",
+    "https://www.google-analytics.com/"
+
 ];
 const styleSrcUrls = [
     "https://cdn.jsdelivr.net/",
@@ -71,8 +73,8 @@ const connectSrcUrls = [
     "https://b.tiles.mapbox.com/",
     "https://events.mapbox.com/",
     "https://api.unsplash.com/photos/random",
-    "https://www.googletagmanager.com/"
-
+    "https://www.googletagmanager.com/",
+    "https://www.google-analytics.com/"
     
 ];
 app.use(
